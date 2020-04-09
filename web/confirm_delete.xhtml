@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>ONAY</title>
+        <h:outputStylesheet library="css" name="bootstrap.css" />
+    </h:head>
+    <h:body>
+        <div class="container ">        
+            <h5> <b>Bu kaydı silmek istediğinize emin misiniz?</b></h5>
+           
+            <pre>          
+         <h6>        <b>Kullanıcı Id : </b>#{kullaniciController.k.kul_id}         </h6>
+          <h6>        <b>Kullanıcı Adı : </b>#{kullaniciController.k.kul_adi}       </h6>
+          <h6>        <b>Kullanıcı Şifre : </b>#{kullaniciController.k.kul_sifre}         </h6>
+            </pre>
+            
+            <h:form>
+               
+                <h:commandButton styleClass="btn-dark" action="#{kullaniciController.geriDönüs()}" style="margin-left:95px" value="Vazgeç"/>
+                <h:commandButton styleClass="btn-danger" action="#{kullaniciController.delete()}" style="margin-left:50px" value="Sil"/>
+               
+            </h:form>
+            
+              </div>
+    </h:body>
+</html>
+
