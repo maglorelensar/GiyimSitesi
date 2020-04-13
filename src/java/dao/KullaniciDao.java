@@ -45,7 +45,7 @@ public class KullaniciDao {
             ResultSet rs = st.executeQuery("select * from kullanici");
 
             while (rs.next()) {
-                kullist.add(new Kullanici(rs.getInt("kul_id"), rs.getString("kul_adi"), rs.getString("kul_sifre")));
+                kullist.add(new Kullanici(rs.getInt("k_id"), rs.getString("k_adi"), rs.getString("k_sifre")));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -68,7 +68,7 @@ public class KullaniciDao {
 
         try {
             Statement st = this.getC().createStatement();
-            st.executeUpdate("delete from kullanici where kul_id=" + k.getKul_id());
+            st.executeUpdate("delete from kullanici where k_id=" + k.getKul_id());
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -80,11 +80,31 @@ public class KullaniciDao {
         try {
             Statement st = this.getC().createStatement();
           
-            st.executeUpdate("Update kullanici set kul_adi='" + k.getKul_adi() + "',kul_sifre='" + k.getKul_sifre() + "' where kul_id='" + k.getKul_id() + "'");
+            st.executeUpdate("Update kullanici set k_adi='" + k.getKul_adi() + "',k_sifre='" + k.getKul_sifre() + "' where k_id='" + k.getKul_id() + "'");
            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public Kullanici getBaginti(int kullanici_id) {
+       Kullanici kul = null;
+        try {
+            Statement st = this.getC().createStatement();
+            ResultSet rs = st.executeQuery("select * from kullanici where k_id="+kullanici_id);
+            rs.next();
+            
+            kul=new Kullanici();
+
+            kul.setKul_id(rs.getInt("k_id"));
+            kul.setKul_adi(rs.getString("k_adi"));
+            kul.setKul_sifre(rs.getString("k_sifre"));
+            
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return kul;
     }
 
 }

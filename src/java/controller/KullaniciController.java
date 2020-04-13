@@ -29,7 +29,7 @@ public class KullaniciController implements Serializable {
      public String delete(){
         this.getKulDao().delete(this.k);
         this.k=new Kullanici();
-       return "index";
+       return "kullanici.xhtml";
     }
     public void güncelle(){
         this.getKulDao().update(k);
@@ -72,5 +72,9 @@ public class KullaniciController implements Serializable {
         return this.getKulDao().getList();
      
     }
-
+ public Kullanici getBaginti(int sepet_id) {
+       
+        return this.getKulDao().getBaginti(sepet_id);
+     
+    }
 }

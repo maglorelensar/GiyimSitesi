@@ -19,7 +19,7 @@ public class DBConnection {
           
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            c=DriverManager.getConnection("jdbc:mysql://localhost:3307/giyim?user=root&password=root");
+            c=DriverManager.getConnection("jdbc:mysql://localhost:3307/deneme?user=root&password=root");
             System.out.println("Bağlantı Başarılı");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
