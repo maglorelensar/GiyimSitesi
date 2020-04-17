@@ -5,38 +5,28 @@
  */
 package entity;
 
-/**
- *
- * @author LENOVO
- */
+
 public class Sepet {
     private int sepet_id;
-    private int urun_adet;
     private Kullanici k;
-    private Bedenler b;
-    private Renkler r;
     private Urunler u;
-
+    private int urun_adet;
+    private Renkler r;
+    private Bedenler b;
+    
     public Sepet() {
     }
 
-    public Sepet(int sepet_id,  int urun_adet,Kullanici k) {
+    public Sepet(int sepet_id, Kullanici k, Urunler u, int urun_adet, Renkler r, Bedenler b) {
         this.sepet_id = sepet_id;
+        this.k = k;
+        this.u = u;
         this.urun_adet = urun_adet;
-       this.k=k;
-      
+        this.r = r;
+        this.b = b;
     }
 
-  
-   
-    public Sepet(int sepet_id, int urun_adet, Kullanici k, Bedenler b, Renkler r, Urunler u) {
-        this.sepet_id = sepet_id;
-        this.urun_adet = urun_adet;
-        this.k = k;
-        this.b = b;
-        this.r = r;
-        this.u = u;
-    }
+    
 
     public int getSepet_id() {
         return sepet_id;
@@ -65,6 +55,8 @@ public class Sepet {
     }
 
     public Bedenler getB() {
+        if(this.b==null)
+            this.b=new Bedenler();
         return b;
     }
 
@@ -73,6 +65,8 @@ public class Sepet {
     }
 
     public Renkler getR() {
+        if(this.r==null)
+            this.r=new Renkler();
         return r;
     }
 
@@ -81,6 +75,8 @@ public class Sepet {
     }
 
     public Urunler getU() {
+        if(this.u==null)
+            this.u=new Urunler();
         return u;
     }
 

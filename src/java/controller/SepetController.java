@@ -12,11 +12,8 @@ import javax.inject.Named;
 import entity.*;
 import java.util.List;
 
-/**
- *
- * @author LENOVO
- */
-@Named
+
+@Named(value="sptc")
 @SessionScoped
 public class SepetController implements Serializable{
 
@@ -24,18 +21,42 @@ public class SepetController implements Serializable{
     private List<Sepet> sepetlist;
     private Sepet s;
 
+    public List<Sepet>getListsepet() {
+        return this.getsDao().getSepetList();
+    }
+    
+public void sepeteekle(Urunler u) {
+    Sepet s=new Sepet();
+    s.setR(u.getRenk());
+    s.setB(u.getBeden());
+    s.setU(u);
+        this.getsDao().add(s);
+         this.s=new Sepet();
+    }
+
+public void guncellesepet(){
+        this.getsDao().guncelle(this.s);
+         this.s=new Sepet();
+    }
+public void formtemizle(){
+this.s=new Sepet();
+}
+    public void updatesepet(Sepet s){
+        this.s=s;
+    } 
+    public void sepettensil(Sepet s){
+        this.getsDao().delete(s);
+        
+    }
+    
     public SepetDao getsDao() {
         if(this.sDao==null)
         this.sDao=new SepetDao();
         return sDao;
     }
 
-    public void setsDao(SepetDao sDao) {
-        this.sDao = sDao;
-    }
-
     public List<Sepet> getSepetlist() {
-        this.sepetlist=this.getsDao().getList();
+        this.sepetlist=this.getsDao().getSepetList();
         return sepetlist;
     }
 
@@ -48,9 +69,4 @@ public class SepetController implements Serializable{
         this.s=new Sepet();
         return s;
     }
-
-    public void setS(Sepet s) {
-        this.s = s;
-    }
-
 }

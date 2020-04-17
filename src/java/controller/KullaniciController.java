@@ -17,19 +17,10 @@ public class KullaniciController implements Serializable {
      
     public KullaniciController() {
     }
-        
-    public String geriDönüs(){
+   
+     public void delete(Kullanici k){
+        this.getKulDao().delete(k);
         this.k=new Kullanici();
-        return"index";
-    }
-    public String deleteConfirm(Kullanici k){
-        this.k=k;        
-        return "confirm_delete";
-    }
-     public String delete(){
-        this.getKulDao().delete(this.k);
-        this.k=new Kullanici();
-       return "kullanici.xhtml";
     }
     public void güncelle(){
         this.getKulDao().update(k);
@@ -62,7 +53,6 @@ public class KullaniciController implements Serializable {
     }
 
      public void kayit() {
-       //Kullanici kk=new Kullanici(this.getK().getKul_adi(), this.getK().getKul_sifre());
         this.getKulDao().addToList(this.k);
          this.k=new Kullanici();
     }

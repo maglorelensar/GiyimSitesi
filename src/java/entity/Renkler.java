@@ -1,18 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package entity;
 
-/**
- *
- * @author LENOVO
- */
+
 public class Renkler {
     private int r_id;
-    private int r_adi;
+    private String r_adi;
 
+    public Renkler() {
+    }
+
+    public Renkler(int r_id, String r_adi) {
+        this.r_id = r_id;
+        this.r_adi = r_adi;
+    }
+
+    
     public int getR_id() {
         return r_id;
     }
@@ -21,11 +23,11 @@ public class Renkler {
         this.r_id = r_id;
     }
 
-    public int getR_adi() {
+    public String getR_adi() {
         return r_adi;
     }
 
-    public void setR_adi(int r_adi) {
+    public void setR_adi(String r_adi) {
         this.r_adi = r_adi;
     }
 

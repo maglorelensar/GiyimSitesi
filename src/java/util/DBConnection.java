@@ -7,30 +7,34 @@ package util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
-/**
- *
- * @author LENOVO
- */
+
 public class DBConnection {
-    private Connection c;
-
-    public Connection getConnection() {
-          
+private static String url = "jdbc:mysql://localhost:3307/deneme";    
+    private static String driverName = "com.mysql.jdbc.Driver";   
+    private static String username = "root";   
+    private static String password = "root";
+    private static Connection c;
+    public static Connection getConnection() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            c=DriverManager.getConnection("jdbc:mysql://localhost:3307/deneme?user=root&password=root");
-            System.out.println("Bağlantı Başarılı");
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            Class.forName(driverName);
+            try {
+                c = DriverManager.getConnection(url, username, password);
+                System.out.println("Veri tabanı bağlantısı başarılı.");
+            } catch (SQLException ex) {
+                System.out.println("Veri tabanı bağlantısı başarısız."); 
+            }
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Sürücü bulunamadı.");
         }
-        
         return c;
- 
     }
-
-    public void setConnection(Connection connection) {
-        this.c = connection;
-    }
-    
+    public static void closeConnection(Connection c) {
+		try {
+			c.close();
+                        System.out.println("Veri tabanı bağlantısı kapatıldı.");
+		} catch (Exception ex) {
+		}
+	}
 }

@@ -1,17 +1,48 @@
 
 package entity;
 
-import java.util.List;
 
 public class Urunler {
     private int urun_id;
     private String urun_adi;
     private double urun_fiyat;
+    private int urun_stok_adedi;
+    private Renkler renk;
+    private Bedenler beden;
+public Urunler() {
+    }
 
-    public Urunler() {
+    public Urunler(int urun_id, String urun_adi, double urun_fiyat, int urun_stok_adedi, Renkler renk, Bedenler beden) {
+        this.urun_id = urun_id;
+        this.urun_adi = urun_adi;
+        this.urun_fiyat = urun_fiyat;
+        this.urun_stok_adedi = urun_stok_adedi;
+        this.renk = renk;
+        this.beden = beden;
+    }
+
+    
+
+    public Renkler getRenk() {
+        if(this.renk==null)
+            this.renk=new Renkler();
+        return renk;
+    }
+
+    public void setRenk(Renkler renk) {
+        this.renk = renk;
+    }
+
+    public Bedenler getBeden() {
+        if(this.beden==null)
+            this.beden=new Bedenler();
+        return beden;
+    }
+
+    public void setBeden(Bedenler beden) {
+        this.beden = beden;
     }
     
-            
     public int getUrun_id() {
         return urun_id;
     }
@@ -34,6 +65,14 @@ public class Urunler {
 
     public void setUrun_fiyat(double urun_fiyat) {
         this.urun_fiyat = urun_fiyat;
+    }
+
+    public int getUrun_stok_adedi() {
+        return urun_stok_adedi;
+    }
+
+    public void setUrun_stok_adedi(int urun_stok_adedi) {
+        this.urun_stok_adedi = urun_stok_adedi;
     }
    
     
