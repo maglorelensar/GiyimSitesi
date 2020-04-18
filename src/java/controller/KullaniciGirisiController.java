@@ -21,14 +21,11 @@ import javax.inject.Named;
 public class KullaniciGirisiController implements Serializable{
     private KullaniciGirisi kulgi;
     private KullaniciGirisiDao kulgidao;
-    private boolean icerde;
-    private boolean icerde(){
-    return getKulgidao().getIcerdemi();
-    }
+    private boolean icerde=false;
+    
     public String girisyap() throws SQLException{
         if(this.kulgi==null){
         this.kulgi=new KullaniciGirisi();}
-        
         this.getKulgidao().girisyap(kulgi);
     return "/secret/secret?faces-redirect=true";   
     }
@@ -55,18 +52,7 @@ public class KullaniciGirisiController implements Serializable{
     }
 
     public boolean isIcerde() {
-        if(getKulgidao().isKontrol()==true)
-        {
-            setIcerde(false);
-        }
-        else{
-                setIcerde(getKulgidao().getIcerdemi());
-                }
-        return icerde;
-    }
-
-    public void setIcerde(boolean icerde) {
-        this.icerde = icerde;
+     return getKulgidao().getIcerdemi();
     }
 
 }

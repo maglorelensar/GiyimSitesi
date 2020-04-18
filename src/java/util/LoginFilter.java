@@ -33,7 +33,7 @@ public class LoginFilter implements Filter{
         String url = req.getRequestURI();
         KullaniciGirisi kul = (KullaniciGirisi) req.getSession().getAttribute("simdiki_kul");
         if (kul == null) {
-            if (url.contains("secret") || url.contains("cikisyap")) {
+            if (url.contains("secret")) {
             res.sendRedirect(req.getContextPath()+"/module/kullanicigirisi.xhtml");
                 
             } else {
@@ -45,9 +45,9 @@ if(url.contains("kullanicikayit")||url.contains("kullanicigirisi")){
                 res.sendRedirect(req.getContextPath()+"/secret/secret.xhtml");
 }
 else if(url.contains("cikisyap")){
-    req.getSession().invalidate();
     getKgd().setIcerdemi(false);
-    res.sendRedirect(req.getContextPath()+"cikisyap.xhtml");
+    req.getSession().invalidate();
+    res.sendRedirect(req.getContextPath()+"/faces/module/index.xhtml");
 }
 
 else{

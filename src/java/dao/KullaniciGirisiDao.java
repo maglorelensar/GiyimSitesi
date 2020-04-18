@@ -22,9 +22,8 @@ public class KullaniciGirisiDao {
     
     private static int simdiki_id; 
     private static int simdiki_kk; 
-    private static boolean icerdemi=false;
+    private boolean icerdemi=false;
     private Connection c;
-    private static boolean kontrol;
     public String girisyap(KullaniciGirisi current){
     try {
         c=DBConnection.getConnection();
@@ -42,7 +41,7 @@ public class KullaniciGirisiDao {
                 }if (b == null) {
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sistemde Bu Adda Biri Mevcut Değil!!!!", null);
                 FacesContext.getCurrentInstance().addMessage(null, msg);
-                return "/kullanicigirisi?faces-redirect=true";
+                return "/module/kullanicigirisi?faces-redirect=true";
                 }
             else {
                 pst=c.prepareStatement("select k_sifre from kullanici where k_adi=?");
@@ -51,11 +50,6 @@ public class KullaniciGirisiDao {
             rs1.next();
             String sifre=rs1.getString("k_sifre");
             if(sifre.equals(current.getKk_sifre())){
-            pst=c.prepareStatement("select k_sifre from kullanici where k_adi=?");
-            pst.setString(1, current.getKk_adi());
-            ResultSet rs2 = pst.executeQuery();
-            rs2.next();
-                setKontrol(false);
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("simdiki_kul",current);
                 setIcerdemi(true);
                 return "/secret/secret?faces-redirect=true";
@@ -63,7 +57,7 @@ public class KullaniciGirisiDao {
             else{
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifre Yanlış!!!!", null);
                 FacesContext.getCurrentInstance().addMessage(null, msg);
-            return "/kullanicigirisi?faces-redirect=true";
+            return "/module/kullanicigirisi?faces-redirect=true";
             }
             
             }}
@@ -85,13 +79,7 @@ public class KullaniciGirisiDao {
         this.simdiki_id = simdiki_id;
     }
 
-    public boolean isKontrol() {
-        return kontrol;
-    }
-
-    public void setKontrol(boolean kontrol) {
-        this.kontrol = kontrol;
-    }
+   
     public boolean getIcerdemi() {
         return icerdemi;
     }
