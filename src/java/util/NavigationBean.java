@@ -22,4 +22,7 @@ public class NavigationBean  implements Serializable{
     public String secretpage(String s){
     return "/secret/"+s+"?faces-redirect=true";
     }
+    public String adminpage(String s){
+    return "/admin/"+s+"?faces-redirect=true";
+    }
     }

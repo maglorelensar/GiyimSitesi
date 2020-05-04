@@ -22,6 +22,7 @@ public class UrunlerDao {
 private Connection c;
 RenklerDao renkdao;
 BedenlerDao bedendao;
+PhotosDao phdao;
     public List<Urunler> getUrunList() {
         List<Urunler> urunlist = new ArrayList<>();
         try {
@@ -36,6 +37,7 @@ BedenlerDao bedendao;
                 temp.setUrun_stok_adedi(rs.getInt("urun_stok_adedi"));
                 temp.setRenk(getRenkdao().getRenkList(rs.getInt("urun_rengi")));
                 temp.setBeden(getBedendao().getBedenList(rs.getInt("urun_bedeni")));
+                temp.setPhoto(getPhdao().getPhotoList(rs.getInt("urun_resim")));
                 urunlist.add(temp);
             }
         } catch (Exception e) {
@@ -49,12 +51,13 @@ BedenlerDao bedendao;
     public void add(Urunler urun) {
         try {
             c=DBConnection.getConnection();
-            PreparedStatement pst = c.prepareStatement("insert into urunler values(default,?,?,?,?,?)");
+            PreparedStatement pst = c.prepareStatement("insert into urunler values(default,?,?,?,?,?,?)");
             pst.setString(1, urun.getUrun_adi());    
             pst.setDouble(2, urun.getUrun_fiyat());   
             pst.setInt(3, urun.getUrun_stok_adedi()); 
             pst.setInt(4, urun.getRenk().getR_id()); 
             pst.setInt(5, urun.getBeden().getB_id()); 
+            pst.setInt(6, urun.getPhoto().getD_id()); 
             pst.executeUpdate();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -67,13 +70,14 @@ BedenlerDao bedendao;
     public void guncelle(Urunler urun) {
          try {
             c=DBConnection.getConnection();
-            PreparedStatement pst = c.prepareStatement("Update urunler set urun_adi=?,urun_fiyat=?,urun_stok_adedi=?,urun_rengi=?,urun_bedeni=? where urun_id=?");
+            PreparedStatement pst = c.prepareStatement("Update urunler set urun_adi=?,urun_fiyat=?,urun_stok_adedi=?,urun_rengi=?,urun_bedeni=?,urun_resim=? where urun_id=?");
             pst.setString(1, urun.getUrun_adi());
             pst.setDouble(2, urun.getUrun_fiyat());
             pst.setInt(3, urun.getUrun_stok_adedi());
             pst.setInt(4, urun.getRenk().getR_id());
             pst.setInt(5, urun.getBeden().getB_id());
-            pst.setInt(6, urun.getUrun_id());
+            pst.setInt(6, urun.getPhoto().getD_id());
+            pst.setInt(7, urun.getUrun_id());
             pst.executeUpdate();
            
         } catch (Exception e) {
@@ -89,7 +93,7 @@ BedenlerDao bedendao;
             PreparedStatement pst = c.prepareStatement("delete from urunler where urun_id=?");
             pst.setInt(1, u.getUrun_id());
             pst.executeUpdate();
-
+            getPhdao().sil(u.getPhoto());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }finally {
@@ -110,6 +114,7 @@ BedenlerDao bedendao;
             urun.setUrun_stok_adedi(rs.getInt("urun_stok_adedi"));
             urun.getRenk().setR_id(rs.getInt("urun_rengi"));
             urun.getBeden().setB_id(rs.getInt("urun_bedeni"));
+            urun.getPhoto().setD_id(rs.getInt("urun_resim"));
             
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -129,6 +134,12 @@ BedenlerDao bedendao;
         if(this.bedendao==null)
             this.bedendao=new BedenlerDao();
         return bedendao;
+    }
+
+    public PhotosDao getPhdao() {
+        if(this.phdao==null)
+            this.phdao=new PhotosDao();
+        return phdao;
     }
     
 }

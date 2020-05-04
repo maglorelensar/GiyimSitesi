@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import util.NavigationBean;
 
 /**
  *
@@ -21,13 +22,25 @@ import javax.inject.Named;
 public class KullaniciGirisiController implements Serializable{
     private KullaniciGirisi kulgi;
     private KullaniciGirisiDao kulgidao;
-    private boolean icerde=false;
+   private NavigationBean nvgb;
     
-    public String girisyap() throws SQLException{
+    public void girisyap() throws SQLException{
         if(this.kulgi==null){
         this.kulgi=new KullaniciGirisi();}
         this.getKulgidao().girisyap(kulgi);
-    return "/secret/secret?faces-redirect=true";   
+    }
+    public String yonlendir() throws SQLException{
+       this.girisyap();
+    if(getKulgidao().getIcerdemi()==true&&getKulgidao().isAdminmi()==true){
+    return getNvgb().adminpage("admin");
+    }
+    else if(getKulgidao().getIcerdemi()==true&&getKulgidao().isAdminmi()==false)
+    {
+    return getNvgb().secretpage("secret");
+    }
+    else{
+    return getNvgb().modulepage("kullanicigirisi");
+    }
     }
 
     public KullaniciGirisi getKulgi() {
@@ -53,6 +66,15 @@ public class KullaniciGirisiController implements Serializable{
 
     public boolean isIcerde() {
      return getKulgidao().getIcerdemi();
+    }
+       public boolean isAdminmi() {
+     return getKulgidao().isAdminmi();
+    }
+
+    public NavigationBean getNvgb() {
+        if(this.nvgb==null)
+this.nvgb=new NavigationBean();
+            return nvgb;
     }
 
 }

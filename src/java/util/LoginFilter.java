@@ -33,7 +33,7 @@ public class LoginFilter implements Filter{
         String url = req.getRequestURI();
         KullaniciGirisi kul = (KullaniciGirisi) req.getSession().getAttribute("simdiki_kul");
         if (kul == null) {
-            if (url.contains("secret")) {
+            if (url.equals("secret")||url.equals("admin")) {
             res.sendRedirect(req.getContextPath()+"/module/kullanicigirisi.xhtml");
                 
             } else {
@@ -41,15 +41,15 @@ public class LoginFilter implements Filter{
             }
 
         } else {
-if(url.contains("kullanicikayit")||url.contains("kullanicigirisi")){
+if(url.equals("kullanicikayit")||url.equals("kullanicigirisi")){//contains yazınca yanlşlık oluyor kullanıcı yazısı içeren her sayfada secrete atmaya çalışıyor
                 res.sendRedirect(req.getContextPath()+"/secret/secret.xhtml");
 }
 else if(url.contains("cikisyap")){
     getKgd().setIcerdemi(false);
+    getKgd().setAdminmi(false);
     req.getSession().invalidate();
     res.sendRedirect(req.getContextPath()+"/faces/module/index.xhtml");
 }
-
 else{
 chain.doFilter(request, response);
 }
