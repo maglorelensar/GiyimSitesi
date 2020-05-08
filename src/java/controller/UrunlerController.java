@@ -5,22 +5,24 @@
  */
 package controller;
 
-import dao.UrunlerDao;
-import entity.Urunler;
+import dao.*;
+import entity.*;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named(value="urunc")
 @SessionScoped
 public class UrunlerController implements Serializable{
-Urunler urun;
-    UrunlerDao urundao;
+private Urunler urun;
+   private UrunlerDao urundao;
 
     public UrunlerController() {
     }
-    
+    @Inject
+    private KategoriController katcon;
 public List<Urunler>getListurun() {
         return this.getUrundao().getUrunList();
     }
@@ -57,4 +59,11 @@ this.urun=new Urunler();
             this.urundao=new UrunlerDao();
         return urundao;
     }
+
+    public KategoriController getKatcon() {
+        if(this.katcon==null)
+            this.katcon=new KategoriController();
+        return katcon;
+    }
+
 }

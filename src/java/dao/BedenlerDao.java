@@ -22,7 +22,7 @@ public class BedenlerDao {
             PreparedStatement pst = c.prepareStatement("select * from bedenler");
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                bedenlist.add(new Bedenler(rs.getInt("b_id"), rs.getString("b_tipi")));
+                bedenlist.add(new Bedenler(rs.getLong("b_id"), rs.getString("b_tipi")));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -31,23 +31,6 @@ public class BedenlerDao {
         }
         return bedenlist;
     }
-    public Bedenler getBedenList(int id) {
-        Bedenler bdn=new Bedenler();
-        try {
-            c=DBConnection.getConnection();
-            PreparedStatement pst = c.prepareStatement("select * from bedenler where b_id="+id);
-            ResultSet rs = pst.executeQuery();
-            rs.next();
-             bdn.setB_id(rs.getInt("b_id"));
-             bdn.setB_tipi(rs.getString("b_tipi"));            
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }finally {
-            DBConnection.closeConnection(c);
-        }
-        return bdn;
-    }
-    
     public void add(Bedenler bed) {
         try {
             c=DBConnection.getConnection();
@@ -66,7 +49,7 @@ public class BedenlerDao {
             c=DBConnection.getConnection();
             PreparedStatement pst = c.prepareStatement("Update bedenler set b_tipi=? where b_id=?");
             pst.setString(1, bed.getB_tipi());
-            pst.setInt(2, bed.getB_id());
+            pst.setLong(2, bed.getB_id());
             pst.executeUpdate();
            
         } catch (Exception e) {
@@ -80,7 +63,7 @@ public class BedenlerDao {
         try {
             c=DBConnection.getConnection();
             PreparedStatement pst = c.prepareStatement("delete from bedenler where b_id=?");
-            pst.setInt(1, bed.getB_id());
+            pst.setLong(1, bed.getB_id());
             pst.executeUpdate();
 
         } catch (Exception e) {
@@ -89,7 +72,7 @@ public class BedenlerDao {
             DBConnection.closeConnection(c);
         }
     }
-    public Bedenler getBaginti(int beden_id) {
+    public Bedenler getBaginti(Long beden_id) {
        Bedenler beden = null;
         try {
             c=DBConnection.getConnection();
@@ -97,7 +80,7 @@ public class BedenlerDao {
             ResultSet rs = pst.executeQuery();
             rs.next();
             beden=new Bedenler();
-            beden.setB_id(rs.getInt("b_id"));
+            beden.setB_id(rs.getLong("b_id"));
             beden.setB_tipi(rs.getString("b_tipi"));
            } catch (Exception e) {
             System.out.println(e.getMessage());

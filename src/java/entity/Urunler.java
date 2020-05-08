@@ -1,6 +1,8 @@
 
 package entity;
 
+import java.util.List;
+
 
 public class Urunler {
     private int urun_id;
@@ -10,6 +12,7 @@ public class Urunler {
     private Renkler renk;
     private Bedenler beden;
     private Photos photo;
+    private List<Kategori> urunkategorileri;
 public Urunler() {
     }
 
@@ -85,7 +88,13 @@ public Urunler() {
     public void setPhoto(Photos photo) {
         this.photo = photo;
     }
+
+    public List<Kategori> getUrunkategorileri() {
+        return urunkategorileri;
+    }
+
+    public void setUrunkategorileri(List<Kategori> urunkategorileri) {
+        this.urunkategorileri = urunkategorileri;
+    }
    
-    
-    
 }

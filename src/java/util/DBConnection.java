@@ -21,7 +21,6 @@ private static String url = "jdbc:mysql://localhost:3307/deneme";
             Class.forName(driverName);
             try {
                 c = DriverManager.getConnection(url, username, password);
-                System.out.println("Veri tabanı bağlantısı başarılı.");
             } catch (SQLException ex) {
                 System.out.println("Veri tabanı bağlantısı başarısız."); 
             }
@@ -33,7 +32,6 @@ private static String url = "jdbc:mysql://localhost:3307/deneme";
     public static void closeConnection(Connection c) {
 		try {
 			c.close();
-                        System.out.println("Veri tabanı bağlantısı kapatıldı.");
 		} catch (Exception ex) {
 		}
 	}

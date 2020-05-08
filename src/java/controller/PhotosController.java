@@ -39,6 +39,7 @@ photos.setDosyaadi(r.getName());
 photos.setDosyatipi(photo.getContentType());
 this.getPhDao().ekle(photos);
 }catch(Exception e){
+    System.out.println("resim yüklenmedi");
     System.out.println(e.getMessage());
 }
 }

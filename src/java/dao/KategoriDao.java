@@ -5,7 +5,7 @@
  */
 package dao;
 
-import entity.Renkler;
+import entity.Kategori;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,47 +13,53 @@ import java.util.ArrayList;
 import java.util.List;
 import util.DBConnection;
 
-
-public class RenklerDao {
+/**
+ *
+ * @author user
+ */
+public class KategoriDao {
 private Connection c;
-    public List<Renkler> getRenkList() {
-        List<Renkler> renklist = new ArrayList<>();
+    public List<Kategori> getKategoriList() {
+       List<Kategori> kategorilist = new ArrayList<>();
         try {
             c=DBConnection.getConnection();
-            PreparedStatement pst = c.prepareStatement("select * from renkler");
+            PreparedStatement pst = c.prepareStatement("select * from kategori");
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                renklist.add(new Renkler(rs.getLong("r_id"), rs.getString("r_adi")));
+                kategorilist.add(new Kategori(rs.getLong("kategori_id"), rs.getString("kategori_adi")));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }finally {
             DBConnection.closeConnection(c);
         }
-        return renklist;
+        return kategorilist;
     }
-    public Renkler getRenkList(int id) {
-        Renkler rnk=new Renkler();
+public Kategori getKategori(Long id) {
+        Kategori kate=null;
         try {
             c=DBConnection.getConnection();
-            PreparedStatement pst = c.prepareStatement("select * from renkler where r_id="+id);
+            PreparedStatement pst = c.prepareStatement("select * from kategori where kategori_id="+id);
             ResultSet rs = pst.executeQuery();
             rs.next();
-            rnk.setR_id(rs.getLong("r_id"));
-            rnk.setR_adi(rs.getString("r_adi"));
+            kate=new Kategori();
+             kate.setKat_id(rs.getLong("kategori_id"));
+             kate.setKat_adi(rs.getString("kategori_adi"));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }finally {
             DBConnection.closeConnection(c);
         }
-        return rnk;
+        return kate;
     }
-
-    public void add(Renkler renk) {
-       try {
+    
+    
+    
+    public void add(Kategori kat) {
+        try {
             c=DBConnection.getConnection();
-            PreparedStatement pst = c.prepareStatement("insert into renkler values(default,?)");
-            pst.setString(1, renk.getR_adi());    
+            PreparedStatement pst = c.prepareStatement("insert into kategori values(default,?)");
+            pst.setString(1, kat.getKat_adi());    
             pst.executeUpdate();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -63,12 +69,12 @@ private Connection c;
         }
     }
 
-    public void guncelle(Renkler renk) {
-         try {
+    public void guncelle(Kategori kat) {
+        try {
             c=DBConnection.getConnection();
-            PreparedStatement pst = c.prepareStatement("Update renkler set r_adi=? where r_id=?");
-            pst.setString(1, renk.getR_adi());
-            pst.setLong(2, renk.getR_id());
+            PreparedStatement pst = c.prepareStatement("Update kategori set kategori_adi=? where kategori_id=?");
+            pst.setString(1, kat.getKat_adi());
+            pst.setLong(2, kat.getKat_id());
             pst.executeUpdate();
            
         } catch (Exception e) {
@@ -78,37 +84,35 @@ private Connection c;
         }
     }
 
-    public void delete(Renkler r) {
-        try {
+    public void delete(Kategori ka) {
+    try {
             c=DBConnection.getConnection();
-            PreparedStatement pst = c.prepareStatement("delete from renkler where r_id=?");
-            pst.setLong(1, r.getR_id());
+            PreparedStatement pst = c.prepareStatement("delete from kategori where kategori_id=?");
+            pst.setLong(1, ka.getKat_id());
             pst.executeUpdate();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }finally {
             DBConnection.closeConnection(c);
-        }
+        }   
     }
-    
-    public Renkler getBaginti(Long renk_id) {
-       Renkler renk = null;
+ public List<Kategori> getUrunKategorisi(int urun_id) {
+        List<Kategori> urunkategorisi =new ArrayList<>();
         try {
             c=DBConnection.getConnection();
-            PreparedStatement pst = c.prepareStatement("select * from renkler where r_id="+renk_id);
-            ResultSet rs = pst.executeQuery();
-            rs.next();
-            renk=new Renkler();
-            renk.setR_id(rs.getLong("r_id"));
-            renk.setR_adi(rs.getString("r_adi"));
-            
+            PreparedStatement pst = c.prepareStatement("select * from urun_kategori where urun_id=?");
+            pst.setInt(1, urun_id);
+            ResultSet rs=pst.executeQuery();
+            while(rs.next()){
+            urunkategorisi.add(this.getKategori(rs.getLong("kategori_id")));
+            }
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }finally {
             DBConnection.closeConnection(c);
-        }
-        return renk;
+        }   
+        return urunkategorisi;
     }
-    
 }

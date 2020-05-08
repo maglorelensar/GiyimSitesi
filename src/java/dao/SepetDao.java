@@ -33,8 +33,8 @@ public class SepetDao {
                 temp.setK(getKd().getBaginti(rs.getInt("kul_id")));
                 temp.setU(getUd().getBaginti(rs.getInt("urun_id")));
                 temp.setUrun_adet(rs.getInt("urun_adedi"));
-                temp.setR(getRd().getBaginti(rs.getInt("urun_renk")));
-                temp.setB(getBd().getBaginti(rs.getInt("urun_beden")));
+                temp.setR(getRd().getBaginti(rs.getLong("urun_renk")));
+                temp.setB(getBd().getBaginti(rs.getLong("urun_beden")));
                 sepetlist.add(temp);
             }
         } catch (Exception e) {
@@ -52,8 +52,8 @@ public class SepetDao {
             pst.setInt(1, 1);//sonra değişecek
             pst.setInt(2, s.getU().getUrun_id());
             pst.setInt(3, 1);//sonra değişecek
-            pst.setInt(4, s.getR().getR_id());
-            pst.setInt(5, s.getB().getB_id());
+            pst.setLong(4, s.getR().getR_id());
+            pst.setLong(5, s.getB().getB_id());
             System.out.println("burda");
             pst.executeUpdate();
             System.out.println("burd1a");

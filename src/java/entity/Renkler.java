@@ -1,25 +1,27 @@
 
 package entity;
 
+import java.util.Objects;
+
 
 public class Renkler {
-    private int r_id;
+    private Long r_id;
     private String r_adi;
 
     public Renkler() {
     }
 
-    public Renkler(int r_id, String r_adi) {
+    public Renkler(Long r_id, String r_adi) {
         this.r_id = r_id;
         this.r_adi = r_adi;
     }
 
     
-    public int getR_id() {
+    public Long getR_id() {
         return r_id;
     }
 
-    public void setR_id(int r_id) {
+    public void setR_id(Long r_id) {
         this.r_id = r_id;
     }
 
@@ -31,7 +33,30 @@ public class Renkler {
         this.r_adi = r_adi;
     }
 
-  
- 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.r_id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Renkler other = (Renkler) obj;
+        if (!Objects.equals(this.r_id, other.r_id)) {
+            return false;
+        }
+        return true;
+    }
+
     
 }

@@ -10,18 +10,17 @@
             <div class="row">
         <div class="col-md-4" align="center">
                     <h:form id="beden-girdi">
-                        
                         <div class="form-group">
                             <h:inputHidden value="#{bedc.bed.b_id}"/>
                             <br/><br/>
-                            <b>  Beden Tipi : </b>  <h:inputText styleClass="form-control" value="#{bedc.bed.b_tipi}"/><br />
-                            <center> <h:commandButton rendered="#{bedc.bed.b_id != 0}" styleClass="btn btn-success"  style="margin-right:25px"  action="#{bedc.guncellebeden()}"  value="Güncelle" >                     
-                                    <f:ajax execute="beden-girdi" render="beden-tablo beden-girdi"/>
+                            <b>  Beden Tipi : </b><h:inputText styleClass="form-control" value="#{bedc.bed.b_tipi}"/><br />
+                            <center> <h:commandButton rendered="#{bedc.bed.b_id != null}" styleClass="btn btn-success"  style="margin-right:25px"  action="#{bedc.guncellebeden()}"  value="Güncelle" >                     
+                                    <f:ajax execute="beden-girdi" render="beden-tablo beden-girdi urun-girdi urun-tablo"/>
                                 </h:commandButton>
-                                <h:commandButton rendered="#{bedc.bed.b_id != 0}" styleClass="btn btn-success"  style="margin-right:25px"  action="#{bedc.formtemizle()}"  value="Formu Temizle" >                     
-                                    <f:ajax execute="beden-girdi" render="beden-tablo beden-girdi"/>
+                                <h:commandButton rendered="#{bedc.bed.b_id != null}" styleClass="btn btn-success"  style="margin-right:25px"  action="#{bedc.formtemizle()}"  value="Formu Temizle" >                     
+                                    <f:ajax execute="beden-girdi" render="beden-tablo beden-girdi urun-girdi urun-tablo"/>
                                 </h:commandButton>
-                                <h:commandButton rendered="#{bedc.bed.b_id == 0}" styleClass="btn btn-primary" style="margin-left:25px" action="#{bedc.kaydetbeden()}" value="Kaydet">
+                                <h:commandButton rendered="#{bedc.bed.b_id == null}" styleClass="btn btn-primary" style="margin-left:25px" action="#{bedc.kaydetbeden()}" value="Kaydet">
                                     <f:ajax execute="beden-girdi" render="beden-tablo beden-girdi urun-girdi urun-tablo"/>
                             </h:commandButton>
                             </center> 
@@ -50,19 +49,18 @@
                         </h:dataTable>
                     </h:form>
        </div>
-                <div class="col-md-4"></div>
                 <div class="col-md-4" align="center">
                     <h:form id="renk-girdi">
                         <div class="form-group">
                             <h:inputHidden value="#{renkc.renk.r_id}"/>
-                            <br/><br/><b> Renk Adı : </b>  <h:inputText styleClass="form-control" value="#{renkc.renk.r_adi}"/><br />
-                            <center> <h:commandButton rendered="#{renkc.renk.r_id != 0}" styleClass="btn btn-success"  style="margin-right:25px"  action="#{renkc.guncellerenk()}"  value="Güncelle">                     
-                                    <f:ajax execute="renk-girdi" render="renk-tablo renk-girdi"/>
+                            <br/><br/><b> Renk Adı :</b>  <h:inputText styleClass="form-control" value="#{renkc.renk.r_adi}"/><br />
+                            <center> <h:commandButton rendered="#{renkc.renk.r_id != null}" styleClass="btn btn-success"  style="margin-right:25px"  action="#{renkc.guncellerenk()}"  value="Güncelle">                     
+                                    <f:ajax execute="renk-girdi" render="renk-tablo renk-girdi urun-girdi urun-tablo"/>
                                 </h:commandButton>
-                                <h:commandButton rendered="#{renkc.renk.r_id != 0}" styleClass="btn btn-success"  style="margin-right:25px"  action="#{renkc.formtemizle()}"  value="Formu Temizle">                     
-                                    <f:ajax execute="renk-girdi" render="renk-tablo renk-girdi"/>
+                                <h:commandButton rendered="#{renkc.renk.r_id != null}" styleClass="btn btn-success"  style="margin-right:25px"  action="#{renkc.formtemizle()}"  value="Formu Temizle">                     
+                                    <f:ajax execute="renk-girdi" render="renk-tablo renk-girdi urun-girdi urun-tablo"/>
                                 </h:commandButton>
-                                <h:commandButton rendered="#{renkc.renk.r_id == 0}" styleClass="btn btn-primary" style="margin-left:25px" action="#{renkc.kaydetrenk()}" value="Kaydet">
+                                <h:commandButton rendered="#{renkc.renk.r_id == null}" styleClass="btn btn-primary" style="margin-left:25px" action="#{renkc.kaydetrenk()}" value="Kaydet">
                                     <f:ajax execute="renk-girdi" render="renk-tablo renk-girdi urun-girdi urun-tablo"/>
                             </h:commandButton>
                             </center> 
@@ -92,6 +90,48 @@
                         </h:dataTable>
                     </h:form>
                 </div>
+                <div class="col-md-4">
+                    <h:form id="kategori-girdi">
+                        <div class="form-group">
+                            <h:inputHidden value="#{katc.kat.kat_id}"/>
+                            <br/><br/><b> Kategori Adı :</b>
+                            <h:inputText styleClass="form-control" value="#{katc.kat.kat_adi}"/><br />
+                            <center> <h:commandButton rendered="#{katc.kat.kat_id != null}" styleClass="btn btn-success"  style="margin-right:25px"  action="#{katc.guncellekategori()}"  value="Güncelle">                     
+                                    <f:ajax execute="kategori-girdi" render="kategori-tablo kategori-girdi urun-girdi urun-tablo"/>
+                                </h:commandButton>
+                                <h:commandButton rendered="#{katc.kat.kat_id != null}" styleClass="btn btn-success"  style="margin-right:25px"  action="#{katc.formtemizle()}"  value="Formu Temizle">                     
+                                    <f:ajax execute="kategori-girdi" render="kategori-tablo kategori-girdi urun-girdi urun-tablo"/>
+                                </h:commandButton>
+                                <h:commandButton rendered="#{katc.kat.kat_id == null}" styleClass="btn btn-primary" style="margin-left:25px" action="#{katc.kaydetkategori()}" value="Kaydet">
+                                    <f:ajax execute="kategori-girdi" render="kategori-tablo kategori-girdi urun-girdi urun-tablo"/>
+                            </h:commandButton>
+                            </center> 
+                        </div>
+                    </h:form>
+                   
+                    <h:form id="kategori-tablo">
+                        <h:dataTable styleClass="table table-striped table-hover" value="#{katc.listkategori}" var="k">
+                            <h:column>
+                                <f:facet name="header">Kategori Id </f:facet>
+                                    #{k.kat_id}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Kategori Tipi </f:facet>
+                                    #{k.kat_adi}
+                            </h:column>
+                            <h:column>
+                                <h:commandButton  styleClass="btn btn-danger" value="Sil" action="#{katc.deletekategori(k)}" >
+                                <f:ajax execute="kategori-girdi" render="kategori-tablo kategori-girdi urun-girdi urun-tablo"/>
+                                </h:commandButton>
+                            </h:column>
+                            <h:column>
+                                <h:commandButton styleClass="btn btn-dark" action="#{katc.updatekategori(k)}" value="Düzenle">
+                                <f:ajax execute="kategori-girdi kategori-tablo" render="kategori-girdi kategori-tablo urun-girdi urun-tablo"/>
+                                </h:commandButton>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </div>
 </div>
         -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
          
@@ -104,19 +144,22 @@
                             <b> Ürün Fiyatı : </b>  <h:inputText styleClass="form-control" value="#{urunc.urun.urun_fiyat}"/><br />
                             <b> Ürün Adedi : </b>  <h:inputText styleClass="form-control" value="#{urunc.urun.urun_stok_adedi}"/><br />
                             <b> Ürün Rengi : </b><br/>
-                            <h:selectOneMenu value="#{urunc.urun.renk.r_id}" id="renklistesi">
-                        <f:selectItem itemLabel="Renk Seçiniz" itemValue="#{null}" noSelectionOption="true"/>
-                        <f:selectItems value="#{renkc.listrenk}" var="renkler" itemValue="#{renkler.r_id}" itemLabel="#{renkler.r_adi}"/>
+                            <h:selectOneMenu value="#{urunc.urun.renk}" id="renklistesi" converter="renklerConverter">
+                        
+                        <f:selectItems value="#{renkc.listrenk}" var="renkler" itemValue="#{renkler}" itemLabel="#{renkler.r_adi}"/>
                         </h:selectOneMenu><br/><br/>
                         <b> Ürün Bedeni : </b><br/>
-                        <h:selectOneMenu value="#{urunc.urun.beden.b_id}" id="bedenlistesi">
-                        <f:selectItem itemLabel="Beden Seçiniz" itemValue="#{null}" noSelectionOption="true"/>
-                        <f:selectItems value="#{bedc.listbeden}" var="bedenler" itemValue="#{bedenler.b_id}" itemLabel="#{bedenler.b_tipi}"/>
+                        <h:selectOneMenu value="#{urunc.urun.beden}" id="bedenlistesi" converter="bedenlerConverter">
+                        
+                        <f:selectItems value="#{bedc.listbeden}" var="bedenler" itemValue="#{bedenler}" itemLabel="#{bedenler.b_tipi}"/>
                         </h:selectOneMenu><br/><br/>
                         <b> Ürün Resmi(Dosya adında Türkçe karakter kullanmayınız!!!) : </b>  <h:inputFile value="#{phc.photo}" styleClass="custom-file"/>
                         <h:commandButton action="#{phc.yukle}" value="Resmi yükle" styleClass="btn btn-primary" style="margin-right:25px;"/>
-                        //radio butonu ekle ikisi seçilebilir olsun kategori tablosuna atarsın many to any ilişki
-                       <br/><br/>
+                        <br/><br/>
+                        <b> Ürün Kategorisi : </b><br/>
+                        <h:selectManyListbox value="#{urunc.urun.urunkategorileri}" styleClass="custom-select"  converter="kategoriConverter">
+                            <f:selectItems value="#{urunc.katcon.listkategori}" var="kategori" itemValue="#{kategori}" itemLabel="#{kategori.kat_adi}"/>
+                        </h:selectManyListbox>
                              <h:commandButton rendered="#{urunc.urun.urun_id != 0}" styleClass="btn btn-success"  style="margin-right:25px"  action="#{urunc.guncelleurun()}"  value="Güncelle" >                     
                                     <f:ajax execute="urun-girdi" render="urun-tablo urun-girdi"/>
                                 </h:commandButton>
@@ -153,6 +196,14 @@
                             <h:column>
                                 <f:facet name="header">Ürün Bedeni </f:facet>
                                     #{u.beden.b_tipi}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Ürün Kategorisi </f:facet>
+                                <ul>    
+                                <ui:repeat value="#{u.urunkategorileri}" var="kat">
+                                    <li>#{kat.kat_adi}</li>
+                                </ui:repeat>
+                            </ul>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Ürün Resmi </f:facet>
