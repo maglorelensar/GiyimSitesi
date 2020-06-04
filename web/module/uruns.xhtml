@@ -15,7 +15,6 @@
                             <ui:repeat value="#{urunc.katcon.listkategori}" var="k">
                             <li class="nav-item active">
                                 <h:commandLink style="background-color: pink" styleClass="nav-link" action="#{urunc.filtre(k)}" value="#{k.kat_adi}" rendered="#{!kgc.icerde}">
-                                    <f:ajax execute="@this" render="filtreliliste"/>
                                 </h:commandLink>
                             </li>
                             </ui:repeat></ul>

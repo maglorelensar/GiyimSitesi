@@ -18,7 +18,6 @@ import javax.inject.Named;
 public class UrunlerController implements Serializable{
 private Urunler urun;
    private UrunlerDao urundao;
-private List<Urunler> urunlistesifiltreli;
 
 
     public UrunlerController() {
@@ -37,8 +36,9 @@ filtrele(k);
          return this.getUrundao().getUrunLists();
          }
          else{
-         this.urunlistesifiltreli=this.getUrundao().getFiltrele(k);
-         return this.urunlistesifiltreli;
+         this.getUrundao().setUrunlist(null);
+         this.getUrundao().setUrunlist(this.getUrundao().getFiltrele(k));
+         return this.getUrundao().getUrunlist();
          }
     }
     

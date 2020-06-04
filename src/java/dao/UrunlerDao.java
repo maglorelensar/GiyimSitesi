@@ -196,7 +196,8 @@ List<Urunler> urunlist;
             pst.setString(1, kat.getKat_adi());
             ResultSet rs = pst.executeQuery();
             rs.next();
-                filtrelist=getFiltre(rs.getInt("kategori_id"));
+            filtrelist=getFiltre(rs.getInt("kategori_id"));
+                
             
         } catch (Exception e) {
             System.out.println(e.getMessage());

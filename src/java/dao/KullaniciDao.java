@@ -104,7 +104,6 @@ public void update2(Kullanici k) {
             //eski şifreyle uyumlu mu kontrolü
             PreparedStatement pst = c.prepareStatement("select * from kullanici where k_id=?");
             pst.setInt(1, k.getKul_id());
-            System.out.println("idsi"+k.getKul_id());
             ResultSet rs=pst.executeQuery();
             rs.next();
             String eskisifre=rs.getString("k_sifre");
