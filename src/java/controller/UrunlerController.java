@@ -18,15 +18,29 @@ import javax.inject.Named;
 public class UrunlerController implements Serializable{
 private Urunler urun;
    private UrunlerDao urundao;
+private List<Urunler> urunlistesifiltreli;
+
 
     public UrunlerController() {
     }
     @Inject
     private KategoriController katcon;
 public List<Urunler>getListurun() {
-        return this.getUrundao().getUrunList();
+        return this.getUrundao().getUrunLists();
     }
-    
+public void filtre(Kategori k){
+this.getUrundao().setUrunlist(null);
+filtrele(k);
+}
+     public List<Urunler> filtrele(Kategori k){
+         if(k==null){
+         return this.getUrundao().getUrunLists();
+         }
+         else{
+         this.urunlistesifiltreli=this.getUrundao().getFiltrele(k);
+         return this.urunlistesifiltreli;
+         }
+    }
     
 public void kaydeturun() {
         this.getUrundao().add(this.urun);
@@ -66,4 +80,5 @@ this.urun=new Urunler();
         return katcon;
     }
 
+    
 }

@@ -13,6 +13,9 @@
                                <h:commandLink styleClass="nav-link" action="#{navigationBean.modulepage('index')}" value="Anasayfa" rendered="#{!kgc.icerde}"/>
                             </li>
                             <li class="nav-item active">
+                               <h:commandLink styleClass="nav-link" action="#{navigationBean.modulepage('uruns')}" value="Ürünler" rendered="#{!kgc.icerde}"/>
+                            </li>
+                            <li class="nav-item active">
                                 <h:commandLink styleClass="nav-link" action="#{navigationBean.secretpage('secret')}" value="Anasayfa" rendered="#{kgc.icerde and !kgc.adminmi}"/>
                             </li>
                             <li class="nav-item active">
@@ -28,7 +31,13 @@
                                 <h:commandLink styleClass="nav-link" action="#{navigationBean.modulepage('kullanicikayit')}" value="Kullanıcı Kaydı" rendered="#{!kgc.icerde}"/>
                             </li>
                             <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="#{navigationBean.secretpage('urunsecret')}" value="Ürünler" rendered="#{kgc.icerde and !kgc.adminmi}"/>
+                            </li>
+                            <li class="nav-item active">
                                 <h:commandLink styleClass="nav-link" action="#{navigationBean.secretpage('sepet')}" value="Sepet" rendered="#{kgc.icerde and !kgc.adminmi}"/>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="#{navigationBean.secretpage('guncelle')}" value="Bilgi Güncelle" rendered="#{kgc.icerde and !kgc.adminmi}"/>
                             </li>
                             <li class="nav-item active">
                                 <h:commandLink styleClass="nav-link" action="#{navigationBean.adminpage('urunler')}" value="Ürünler" rendered="#{kgc.icerde and kgc.adminmi}"/>

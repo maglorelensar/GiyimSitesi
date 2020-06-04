@@ -21,7 +21,7 @@ import javax.inject.Named;
 public class KategoriController implements Serializable{
     Kategori kat;
     KategoriDao katdao;
-
+    
     public KategoriController() {
     }
 public List<Kategori>getListkategori() {

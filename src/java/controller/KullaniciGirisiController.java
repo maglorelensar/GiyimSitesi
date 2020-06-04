@@ -39,7 +39,7 @@ public class KullaniciGirisiController implements Serializable{
     return getNvgb().secretpage("secret");
     }
     else{
-    return getNvgb().modulepage("kullanicigirisi");
+        return getNvgb().modulepage("kullanicigirisi");
     }
     }
 

@@ -170,7 +170,7 @@
                                     <f:ajax execute="urun-girdi" render="urun-tablo urun-girdi"/>
                             </h:commandButton>
                         </div>
-                    </h:form>
+                    </h:form>           
                     <h:form id="urun-tablo">
                         <h:dataTable styleClass="table table-striped" value="#{urunc.listurun}" var="u">
                             <h:column>
@@ -199,7 +199,7 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Ürün Kategorisi </f:facet>
-                                <ul>    
+                                <ul>
                                 <ui:repeat value="#{u.urunkategorileri}" var="kat">
                                     <li>#{kat.kat_adi}</li>
                                 </ui:repeat>
@@ -207,7 +207,7 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Ürün Resmi </f:facet>
-                                <h:graphicImage value="/file/#{u.photo.dosyaadi}" width="100" height="80"/>
+                                <h:graphicImage value="/file/#{u.photo.dosyaadi}" width="50" height="50"/>
                             </h:column>
                             
                             <h:column>

@@ -13,17 +13,19 @@ public class Sepet {
     private int urun_adet;
     private Renkler r;
     private Bedenler b;
+    private Photos p;
     
     public Sepet() {
     }
 
-    public Sepet(int sepet_id, Kullanici k, Urunler u, int urun_adet, Renkler r, Bedenler b) {
+    public Sepet(int sepet_id, Kullanici k, Urunler u, int urun_adet, Renkler r, Bedenler b,Photos p) {
         this.sepet_id = sepet_id;
         this.k = k;
         this.u = u;
         this.urun_adet = urun_adet;
         this.r = r;
         this.b = b;
+        this.p=p;
     }
 
     
@@ -82,6 +84,16 @@ public class Sepet {
 
     public void setU(Urunler u) {
         this.u = u;
+    }
+
+    public Photos getP() {
+        if(this.p==null)
+            this.p=new Photos();
+        return p;
+    }
+
+    public void setP(Photos p) {
+        this.p = p;
     }
     
     

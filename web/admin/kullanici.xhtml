@@ -15,17 +15,32 @@
                             <b> Şifre :</b>   <h:inputText styleClass="form-control" value="#{kullaniciController.k.kul_sifre}"/><br />
 
                             <center> <h:commandButton rendered="#{kullaniciController.k.kul_id != 0}" styleClass="btn btn-success"  style="margin-right:25px"  action="#{kullaniciController.güncelle()}"  value="Güncelle " >                     
-                                    <f:ajax execute="kul-girdi" render="kul-tablo kul-girdi"/>
+                                    <f:ajax execute="kul-girdi" render="kul-tablo kul-girdi pagination"/>
                                 </h:commandButton>
                                 <h:commandButton rendered="#{kullaniciController.k.kul_id == 0}" styleClass="btn btn-primary" style="margin-left:25px" action="#{kullaniciController.kayit()}" value="Kaydet">
-                                    <f:ajax execute="kul-girdi" render="kul-tablo kul-girdi"/>
+                                    <f:ajax execute="kul-girdi" render="kul-tablo kul-girdi pagination"/>
                             </h:commandButton>
+                                <h:column>                      
+                                <h:commandButton rendered="#{kullaniciController.k.kul_id != 0}" style="margin-right:25px" styleClass="btn btn-dark" action="#{kullaniciController.formutemizle()}" value="Formu Temizle">
+                                <f:ajax execute="@this" render="kul-girdi kul-tablo"/>
+                                </h:commandButton>
+                            </h:column>
                             </center> 
                         </div>
                     </h:form>
                     
                 </div>
                 <div class="col-md-6">
+                    <div class="btn-group">
+                        <h:form id="pagination">
+                        <pre>#{kullaniciController.pageCount} sayfadan #{kullaniciController.page}. sayfa gösteriliyor.</pre>
+                        <h:commandButton action="#{kullaniciController.geri()}" value="Önceki" styleClass="btn btn-outline-dark">
+                            <f:ajax execute="pagination kul-tablo" render="kul-tablo pagination"/>
+                        </h:commandButton>
+                        <h:commandButton action="#{kullaniciController.ileri()}" value="Sonraki" styleClass="btn btn-outline-dark">
+                            <f:ajax execute="pagination kul-tablo" render="kul-tablo pagination"/>
+                        </h:commandButton></h:form>
+                    </div>
                     <h:form id="kul-tablo">
                         <h:dataTable styleClass="table table-striped" value="#{kullaniciController.list}" var="k">
                             <h:column>
@@ -42,7 +57,7 @@
                             </h:column>
                             <h:column>                              
                                 <h:commandButton styleClass="btn btn-danger" action="#{kullaniciController.delete(k)}" value="Sil">
-                                <f:ajax execute="@this" render="kul-girdi kul-tablo"/></h:commandButton>
+                                <f:ajax execute="@this" render="kul-girdi kul-tablo pagination"/></h:commandButton>
                             </h:column>
                             <h:column>                      
                                 <h:commandButton styleClass="btn btn-dark" action="#{kullaniciController.update(k)}" value="Düzenle">
@@ -51,4 +66,4 @@
                             </h:column>
                         </h:dataTable>  
                     </h:form>
-                </div></ui:define></ui:composition>
+               </div></ui:define></ui:composition>

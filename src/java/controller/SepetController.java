@@ -20,7 +20,6 @@ public class SepetController implements Serializable{
     private SepetDao sDao;
     private List<Sepet> sepetlist;
     private Sepet s;
-
     public List<Sepet>getListsepet() {
         return this.getsDao().getSepetList();
     }
@@ -34,16 +33,10 @@ public void sepeteekle(Urunler u) {
          this.s=new Sepet();
     }
 
-public void guncellesepet(){
-        this.getsDao().guncelle(this.s);
+public void guncellesepet(Sepet s){
+        this.getsDao().guncelle(s);
          this.s=new Sepet();
     }
-public void formtemizle(){
-this.s=new Sepet();
-}
-    public void updatesepet(Sepet s){
-        this.s=s;
-    } 
     public void sepettensil(Sepet s){
         this.getsDao().delete(s);
         
@@ -69,4 +62,8 @@ this.s=new Sepet();
         this.s=new Sepet();
         return s;
     }
+
+
+   
+    
 }

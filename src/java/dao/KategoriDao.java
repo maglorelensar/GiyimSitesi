@@ -6,6 +6,7 @@
 package dao;
 
 import entity.Kategori;
+import entity.Urunler;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +20,7 @@ import util.DBConnection;
  */
 public class KategoriDao {
 private Connection c;
+private UrunlerDao urdao;
     public List<Kategori> getKategoriList() {
        List<Kategori> kategorilist = new ArrayList<>();
         try {
@@ -115,4 +117,13 @@ public Kategori getKategori(Long id) {
         }   
         return urunkategorisi;
     }
+
+   
+
+    public UrunlerDao getUrdao() {
+        if(this.urdao==null)
+            this.urdao=new UrunlerDao();
+        return urdao;
+    }
+    
 }

@@ -6,6 +6,7 @@ public class Kullanici {
     private int kul_id;
     private String kul_adi;
     private String kul_sifre;
+    private String eski_sifre;
 
     public Kullanici() {
     }
@@ -44,11 +45,18 @@ public class Kullanici {
         this.kul_id = kul_id;
     }
 
-    @Override
-    public String toString() {
-        return "Kullanici{" + "kul_id=" + kul_id + ", kul_adi=" + kul_adi + ", kul_sifre=" + kul_sifre + '}';
+    public String getEski_sifre() {
+        return eski_sifre;
     }
 
-   
+    public void setEski_sifre(String eski_sifre) {
+        this.eski_sifre = eski_sifre;
+    }
+
+    @Override
+    public String toString() {
+        return "Kullanici{" + "kul_id=" + kul_id + ", kul_adi=" + kul_adi + ", kul_sifre=" + kul_sifre + ", eski_sifre=" + eski_sifre + '}';
+    }
+
     
 }

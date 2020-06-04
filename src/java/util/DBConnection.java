@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 
 public class DBConnection {
-private static String url = "jdbc:mysql://localhost:3307/deneme";    
+private static String url = "jdbc:mysql://localhost:3307/deneme2";    
     private static String driverName = "com.mysql.jdbc.Driver";   
     private static String username = "root";   
     private static String password = "root";

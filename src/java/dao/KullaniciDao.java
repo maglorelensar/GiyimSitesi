@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import util.DBConnection;
 
 
@@ -13,11 +15,12 @@ public class KullaniciDao {
 
     private Connection c;
  
-    public List<Kullanici> getList() {
+    public List<Kullanici> getList(int page,int pageSize) {
         List<Kullanici> kullist = new ArrayList<>();
+        int start=(page-1)*pageSize;
         try {
             c=DBConnection.getConnection();
-            PreparedStatement pst = c.prepareStatement("select * from kullanici");
+            PreparedStatement pst = c.prepareStatement("select * from kullanici order by k_id asc limit "+start+","+pageSize);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 kullist.add(new Kullanici(rs.getInt("k_id"), rs.getString("k_adi"), rs.getString("k_sifre")));
@@ -35,11 +38,27 @@ public class KullaniciDao {
         
         try {
             c=DBConnection.getConnection();
-            PreparedStatement pst = c.prepareStatement("insert into kullanici values(default,?,?,?)");
+            PreparedStatement pst=c.prepareStatement("select * from kullanici where k_adi=?");
+        pst.setString(1,k.getKul_adi());
+          ResultSet rs = pst.executeQuery();
+            String b = null;
+            while (rs.next()) {
+                String tmp;
+                tmp = rs.getString("k_adi");
+                b = tmp;
+                }if (b != null) {
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sistemde Bu Adda Biri Zaten Mevcut!!!!", null);
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+                }
+                else{
+                pst = c.prepareStatement("insert into kullanici values(default,?,?,?)");
             pst.setString(1, k.getKul_adi());       
             pst.setString(2, k.getKul_sifre());
-            pst.setInt(3, 1);
+            pst.setInt(3, 2);
             pst.executeUpdate();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Kayıt Başarılı!Giriş Yapabilirsiniz!", null);
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+                }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -79,7 +98,35 @@ public class KullaniciDao {
             DBConnection.closeConnection(c);
         }
     }
-
+public void update2(Kullanici k) {
+        try {
+            c=DBConnection.getConnection();
+            //eski şifreyle uyumlu mu kontrolü
+            PreparedStatement pst = c.prepareStatement("select * from kullanici where k_id=?");
+            pst.setInt(1, k.getKul_id());
+            System.out.println("idsi"+k.getKul_id());
+            ResultSet rs=pst.executeQuery();
+            rs.next();
+            String eskisifre=rs.getString("k_sifre");
+            if(eskisifre.equals(k.getEski_sifre())){
+            pst = c.prepareStatement("Update kullanici set k_sifre=? where k_id=?");
+            pst.setString(1, k.getKul_sifre());
+            pst.setInt(2, k.getKul_id());
+            pst.executeUpdate();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Güncelleme Başarılı!", null);
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+            }
+            else{
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Eski Şifreniz Hatalı!!!", null);
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }finally {
+            DBConnection.closeConnection(c);
+        }
+    }
     public Kullanici getBaginti(int kullanici_id) {
        Kullanici kul = null;
         try {
@@ -98,6 +145,23 @@ public class KullaniciDao {
             DBConnection.closeConnection(c);
         }
         return kul;
+    }
+
+    public int count() {
+        int count=0;
+       try {
+            c=DBConnection.getConnection();
+            PreparedStatement pst = c.prepareStatement("select count(k_id) as kul_count from kullanici");
+            ResultSet rs = pst.executeQuery();
+            rs.next();
+            count=rs.getInt("kul_count");
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }finally {
+            DBConnection.closeConnection(c);
+        }
+        return count;
     }
 
 }

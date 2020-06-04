@@ -27,7 +27,7 @@ public class PhotosController implements Serializable{
     private Photos photos;
     private List<Photos> phList;
     private PhotosDao phDao;
-    private final String YKlasoru="C:\\Users\\user\\Documents\\GiyimSitesi\\GiyimSitesi\\res\\";
+    private final String YKlasoru="C:\\Users\\user\\Desktop\\res\\";
 public void yukle(){
 try{
 InputStream girdi=photo.getInputStream();

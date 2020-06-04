@@ -70,7 +70,7 @@ public class PhotosDao {
         }
     return deger;
 }
-    public Photos getPhotoList(int id) {
+    public Photos getBaginti(int id) {
         Photos pht=new Photos();
         try {
             c=DBConnection.getConnection();

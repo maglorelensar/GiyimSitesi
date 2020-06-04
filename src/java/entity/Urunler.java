@@ -1,6 +1,7 @@
 
 package entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -13,6 +14,7 @@ public class Urunler {
     private Bedenler beden;
     private Photos photo;
     private List<Kategori> urunkategorileri;
+    
 public Urunler() {
     }
 
@@ -90,11 +92,15 @@ public Urunler() {
     }
 
     public List<Kategori> getUrunkategorileri() {
+        if(this.urunkategorileri==null)
+            this.urunkategorileri=new ArrayList<>();
         return urunkategorileri;
     }
 
     public void setUrunkategorileri(List<Kategori> urunkategorileri) {
         this.urunkategorileri = urunkategorileri;
     }
+
+    
    
 }
