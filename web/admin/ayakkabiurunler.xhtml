@@ -1,0 +1,245 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/template/template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">       
+        <div class="row">
+            <div class="col-md-4" align="center">
+                <h:form id="aykbno-girdi">
+                    <div class="form-group">
+                        <h:inputHidden value="#{aykbnoc.aykn.ano_id}"/>
+                        <br/><br/><h5><b> Ayakkabı Numaraları </b></h5>  <h:inputText styleClass="form-control" value="#{aykbnoc.aykn.a_no}"/><br />
+                        <center> <h:commandButton rendered="#{aykbnoc.aykn.ano_id != null}" styleClass="btn btn-success"  style="margin-right:25px"  action="#{aykbnoc.updateaykbno()}"  value="Güncelle">                     
+                                <f:ajax execute="aykbno-girdi" render="aykbno-tablo aykbno-girdi ayakkabi-girdi ayakkabi-tablo  "/>
+                            </h:commandButton>
+                            <h:commandButton rendered="#{aykbnoc.aykn.ano_id != null}" styleClass="btn btn-warning"  style="margin-right:25px"  action="#{aykbnoc.clearForm()}"  value="Formu Temizle">                     
+                                <f:ajax execute="aykbno-girdi" render="aykbno-tablo aykbno-girdi ayakkabi-girdi ayakkabi-tablo "/>
+                            </h:commandButton>
+                            <h:commandButton rendered="#{aykbnoc.aykn.ano_id == null}" styleClass="btn btn-primary" style="margin-left:25px" action="#{aykbnoc.submitaykbno()}" value="Kaydet">
+                                <f:ajax execute="aykbno-girdi" render="aykbno-tablo aykbno-girdi ayakkabi-girdi ayakkabi-tablo "/>
+                            </h:commandButton>
+                        </center> 
+                    </div>
+                </h:form>
+
+                <h:form id="aykbno-tablo">
+                    <h:dataTable styleClass="table table-striped table-hover" value="#{aykbnoc.listaykbno}" var="a">
+                        <h:column>
+                            <f:facet name="header">AykbNo ID </f:facet>
+                                #{a.ano_id}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Aykb No </f:facet>
+                                #{a.a_no}
+                        </h:column>
+                        <h:column>
+                            <h:commandButton  styleClass="btn btn-danger" value="Sil" action="#{aykbnoc.deleteaykbno(a)}" >
+                                <f:ajax execute="aykbno-girdi" render="aykbno-tablo aykbno-girdi ayakkabi-girdi ayakkabi-tablo  "/>
+                            </h:commandButton>
+                        </h:column>
+                        <h:column>
+                            <h:commandButton styleClass="btn btn-dark" action="#{aykbnoc.editaykbno(a)}" value="Düzenle">
+                                <f:ajax execute="aykbno-girdi aykbno-tablo" render="aykbno-girdi aykbno-tablo ayakkabi-girdi ayakkabi-tablo  "/>
+                            </h:commandButton>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </div>
+            <div class="col-md-4" align="center">
+                <h:form id="renk-girdi">
+                    <div class="form-group">
+                        <h:inputHidden value="#{renkc.renk.r_id}"/>
+                        <br/><br/><h5><b> Renk Adı :</b></h5>  <h:inputText styleClass="form-control" value="#{renkc.renk.r_adi}"/><br />
+                        <center> <h:commandButton rendered="#{renkc.renk.r_id != null}" styleClass="btn btn-success"  style="margin-right:25px"  action="#{renkc.guncellerenk()}"  value="Güncelle">                     
+                                <f:ajax execute="renk-girdi" render="renk-tablo renk-girdi ayakkabi-girdi ayakkabi-tablo  "/>
+                            </h:commandButton>
+                            <h:commandButton rendered="#{renkc.renk.r_id != null}" styleClass="btn btn-warning"  style="margin-right:25px"  action="#{renkc.formtemizle()}"  value="Formu Temizle">                     
+                                <f:ajax execute="renk-girdi" render="renk-tablo renk-girdi ayakkabi-girdi ayakkabi-tablo  "/>
+                            </h:commandButton>
+                            <h:commandButton rendered="#{renkc.renk.r_id == null}" styleClass="btn btn-primary" style="margin-left:25px" action="#{renkc.kaydetrenk()}" value="Kaydet">
+                                <f:ajax execute="renk-girdi" render="renk-tablo renk-girdi ayakkabi-girdi ayakkabi-tablo  "/>
+                            </h:commandButton>
+                        </center> 
+                    </div>
+                </h:form>
+
+                <h:form id="renk-tablo">
+                    <h:dataTable styleClass="table table-striped table-hover" value="#{renkc.listrenk}" var="r">
+                        <h:column>
+                            <f:facet name="header">Renk Id </f:facet>
+                                #{r.r_id}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Renk Tipi </f:facet>
+                                #{r.r_adi}
+                        </h:column>
+                        <h:column>
+                            <h:commandButton  styleClass="btn btn-danger" value="Sil" action="#{renkc.deleterenk(r)}" >
+                                <f:ajax execute="renk-girdi" render="renk-tablo renk-girdi ayakkabi-girdi ayakkabi-tablo  "/>
+                            </h:commandButton>
+                        </h:column>
+                        <h:column>
+                            <h:commandButton styleClass="btn btn-dark" action="#{renkc.updaterenk(r)}" value="Düzenle">
+                                <f:ajax execute="renk-girdi renk-tablo" render="renk-girdi renk-tablo ayakkabi-girdi ayakkabi-tablo  "/>
+                            </h:commandButton>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </div>
+            <div class="col-md-4" align="center">
+                <h:form id="marka-girdi">
+                    <div class="form-group">
+                        <h:inputHidden value="#{markc.mrk.marka_id}"/>
+                        <br/><br/><h5><b> Marka Adı :</b></h5> <h:inputText styleClass="form-control" value="#{markc.mrk.marka_adi}"/><br />
+                        <center> <h:commandButton rendered="#{markc.mrk.marka_id != null}" styleClass="btn btn-success"  style="margin-right:25px"  action="#{markc.updatemark()}"  value="Güncelle">                     
+                                <f:ajax execute="marka-girdi" render="marka-tablo marka-girdi ayakkabi-tablo ayakkabi-girdi"/>
+                            </h:commandButton>
+                            <h:commandButton rendered="#{markc.mrk.marka_id != null}" styleClass="btn btn-warning"  style="margin-right:25px"  action="#{markc.clearform()}"  value="Formu Temizle">                     
+                                <f:ajax execute="marka-girdi" render="marka-tablo marka-girdi ayakkabi-tablo ayakkabi-girdi"/>
+                            </h:commandButton>
+                            <h:commandButton rendered="#{markc.mrk.marka_id == null}" styleClass="btn btn-primary" style="margin-left:25px" action="#{markc.submitmarka()}" value="Kaydet">
+                                <f:ajax execute="marka-girdi" render="marka-tablo marka-girdi ayakkabi-tablo ayakkabi-girdi"/>
+                            </h:commandButton>
+                        </center> 
+                    </div>
+                </h:form>
+
+                <h:form id="marka-tablo">
+                    <h:dataTable styleClass="table table-striped table-hover" value="#{markc.listmarka}" var="m">
+                        <h:column>
+                            <f:facet name="header">Marka Id </f:facet>
+                                #{m.marka_id}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Marka Adı </f:facet>
+                                #{m.marka_adi}
+                        </h:column>
+                        <h:column>
+                            <h:commandButton  styleClass="btn btn-danger" value="Sil" action="#{markc.deletemarka(m)}" >
+                                <f:ajax execute="marka-girdi" render="marka-tablo marka-girdi ayakkabi-tablo ayakkabi-girdi  "/>
+                            </h:commandButton>
+                        </h:column>
+                        <h:column>
+                            <h:commandButton styleClass="btn btn-dark" action="#{markc.editmarka(m)}" value="Düzenle">
+                                <f:ajax execute="marka-girdi" render="marka-girdi marka-tablo ayakkabi-tablo ayakkabi-girdi "/>
+                            </h:commandButton>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </div>
+        </div> 
+        <h1><b>--------------------------------------------------------------------</b></h1>
+        <div class="row" >
+            <div class="col-md-9">
+                <div class="btn-group">
+
+                    <h:form id="pagination">
+                        <pre><b><h7>#{ac.page}</h7></b>.sayfa <b><h7>#{ac.pageCount}</h7></b> sayfasayısı </pre>
+                        <h:commandButton action="#{ac.previous()}" value="Önceki" styleClass="btn btn-outline-dark">
+                            <f:ajax execute="pagination ayakkabi-tablo" render="ayakkabi-tablo pagination"/></h:commandButton>
+                        <h:commandButton action="#{ac.next()}" value="Sonraki" styleClass="btn btn-outline-dark"> 
+                            <f:ajax execute="pagination ayakkabi-tablo" render="ayakkabi-tablo pagination"/></h:commandButton> 
+                    </h:form>
+                </div>
+                <h:form id="ayakkabi-tablo">
+                    <h:dataTable styleClass="table table-striped" value="#{ac.listaurun}" var="a">
+                        <h:column>
+                            <f:facet name="header">ID </f:facet>
+                                #{a.aurn_id}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"> AD  </f:facet>
+                                #{a.aurn_adi}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">FİYAT</f:facet>
+                            #{a.aurn_fiyat}TL
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">ADET</f:facet>
+                                #{a.aurn_adedi}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"> RENK </f:facet>
+                                #{a.renk.r_adi}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">NO </f:facet>
+                                #{a.ayakkabino.a_no}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"> MARKA </f:facet>
+                            <ul>
+                                <ui:repeat value="#{a.urunmarkalari}" var="mrk">
+                                    <li>#{mrk.marka_adi}</li>
+                                </ui:repeat>
+                            </ul>
+                        </h:column>
+                          
+                        
+                        <h:column>                              
+                            <h:commandButton styleClass="btn btn-danger" action="#{ac.deletaurun(a)}" value="Sil">
+                                <f:ajax execute="ayakkabi-girdi " render="ayakkabi-girdi ayakkabi-tablo"/></h:commandButton>
+                        </h:column>
+                        <h:column>                      
+                            <h:commandButton styleClass="btn btn-dark" action="#{ac.editaurun(a)}" value="Düzenle">
+                                <f:ajax execute=" ayakkabi-girdi " render="ayakkabi-girdi ayakkabi-tablo "/>
+                            </h:commandButton>
+                        </h:column>
+                    </h:dataTable>  
+                </h:form>
+
+            </div>
+            <div class="col-md-3">
+                <h:form id="ayakkabi-girdi" >
+
+
+                    <div class="form-group">
+                        <h:inputHidden value="#{ac.aurn.aurn_id}"/>
+                        <b>  Ayakkabı Adı : </b>  <h:inputText styleClass="form-control" value="#{ac.aurn.aurn_adi}"/><br />
+                        <b>  Ayakkabı Fiyat : </b>  <h:inputText styleClass="form-control" value="#{ac.aurn.aurn_fiyat}"/><br />
+                        <b>  Ayakkabı Adet : </b>  <h:inputText styleClass="form-control" value="#{ac.aurn.aurn_adedi}"/><br />
+                        <br></br>
+                        <b> Ayakkabı Rengi  </b><br/>
+                        <h:selectOneMenu value="#{ac.aurn.renk}" id="renklistesi" converter="renklerConverter">
+
+                            <f:selectItems value="#{renkc.listrenk}" var="renkler" itemValue="#{renkler}" itemLabel="#{renkler.r_adi}"/>
+                        </h:selectOneMenu><br/><br/>
+
+                        <b> Ayakkabı No  </b><br/>
+                        <h:selectOneMenu value="#{ac.aurn.ayakkabino}" id="ayakkabinolistesi" converter="ayakkabinoConverter">
+
+
+                            <f:selectItems value="#{aykbnoc.listaykbno}" var="aykbno" itemValue="#{aykbno}" itemLabel="#{aykbno.a_no}"/>
+                        </h:selectOneMenu><br/><br/>
+
+                        <b> Ayakkabı Markası  </b><br/>
+                        <h:selectManyListbox value="#{ac.aurn.urunmarkalari}" styleClass="custom-select"  converter="markaConverter">
+                            <f:selectItems value="#{ac.mrkc.listmarka}" var="marka" itemValue="#{marka}" itemLabel="#{marka.marka_adi}"/>
+                        </h:selectManyListbox>
+                        
+                        <br></br>
+                        
+
+                        <center> <h:commandButton rendered="#{ac.aurn.aurn_id != 0}" styleClass="btn btn-success"  style="margin-right:25px"  action="#{ac.updateaurun()}"  value="Güncelle " >                     
+                                <f:ajax execute="ayakkabi-girdi" render="ayakkabi-girdi ayakkabi-tablo pagination"/>
+                            </h:commandButton>
+                            <h:commandButton rendered="#{ac.aurn.aurn_id == 0}" styleClass="btn btn-primary" style="margin-left:25px" action="#{ac.submitaurun()}" value="Kaydet">
+                                <f:ajax execute="ayakkabi-girdi" render="ayakkabi-girdi ayakkabi-tablo pagination"/>
+                            </h:commandButton>
+                            <h:column>                      
+                                <h:commandButton rendered="#{ac.aurn.aurn_id != 0}"  styleClass="btn btn-warning" action="#{ac.clearForm()}" value="Formu Temizle">
+                                    <f:ajax execute="ayakkabi-girdi " render="ayakkabi-girdi ayakkabi-tablo pagination"/>
+                                </h:commandButton>
+                            </h:column>
+                        </center> 
+                    </div>
+                </h:form>
+            </div>
+
+        </div>
+    </ui:define></ui:composition>

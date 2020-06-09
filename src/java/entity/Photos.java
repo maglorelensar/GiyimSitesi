@@ -5,7 +5,6 @@
  */
 package entity;
 
-import dao.PhotosDao;
 
 /**
  *
@@ -42,9 +41,7 @@ public class Photos {
     }
 
     public int getD_id() {
-        PhotosDao pd=new PhotosDao();
-        int pk=pd.songetir();
-        return pk;
+        return d_id;
     }
 
     public void setD_id(int d_id) {

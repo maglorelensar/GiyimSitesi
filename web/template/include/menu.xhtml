@@ -43,8 +43,15 @@
                                 <h:commandLink styleClass="nav-link" action="#{navigationBean.adminpage('urunler')}" value="Ürünler" rendered="#{kgc.icerde and kgc.adminmi}"/>
                             </li>
                             <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="#{navigationBean.adminpage('ayakkabiurunler')}" value="Ürünler-Ayakkabi" rendered="#{kgc.icerde and kgc.adminmi}"/>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="#{navigationBean.adminpage('dosyaislemleri')}" value="Dosya İşlemleri" rendered="#{kgc.icerde and kgc.adminmi}"/>
+                            </li>
+                            <li class="nav-item active">
                                 <h:commandLink styleClass="nav-link" action="#{navigationBean.modulepage('cikisyap')}" value="Çıkış Yap" rendered="#{kgc.icerde}"/>
                             </li>
+                            
                         </ul>
                             </h:form>
                     </div>

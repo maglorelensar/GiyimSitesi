@@ -44,6 +44,10 @@ this.getPhDao().ekle(photos);
 }
 }
 
+public void sil(Photos photo){
+this.getPhDao().sil(photo);
+}
+
     public String getYKlasoru() {
         return YKlasoru;
     }

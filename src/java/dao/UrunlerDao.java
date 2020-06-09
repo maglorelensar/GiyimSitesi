@@ -39,7 +39,6 @@ List<Urunler> urunlist;
                 temp.setUrun_stok_adedi(rs.getInt("urun_stok_adedi"));
                 temp.setRenk(getRenkdao().getRenkList(rs.getInt("urun_rengi")));
                 temp.setBeden(getBedendao().getBaginti(rs.getLong("urun_bedeni")));
-                temp.setPhoto(getPhdao().getBaginti(rs.getInt("urun_resim")));
                 temp.setUrunkategorileri(this.getKatdao().getUrunKategorisi(temp.getUrun_id()));
                 getUrunlist().add(temp);
             }
@@ -54,13 +53,12 @@ List<Urunler> urunlist;
     public void add(Urunler urun) {
         try {
             c=DBConnection.getConnection();
-            PreparedStatement pst = c.prepareStatement("insert into urunler values(default,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement pst = c.prepareStatement("insert into urunler values(default,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
             pst.setString(1, urun.getUrun_adi());    
             pst.setDouble(2, urun.getUrun_fiyat());   
             pst.setInt(3, urun.getUrun_stok_adedi()); 
             pst.setLong(4, urun.getRenk().getR_id()); 
             pst.setLong(5, urun.getBeden().getB_id()); 
-            pst.setInt(6, urun.getPhoto().getD_id());
             
             int urunid=0;
             pst.executeUpdate();
@@ -87,14 +85,13 @@ List<Urunler> urunlist;
     public void guncelle(Urunler urun) {
          try {
             c=DBConnection.getConnection();
-            PreparedStatement pst = c.prepareStatement("Update urunler set urun_adi=?,urun_fiyat=?,urun_stok_adedi=?,urun_rengi=?,urun_bedeni=?,urun_resim=? where urun_id=?");
+            PreparedStatement pst = c.prepareStatement("Update urunler set urun_adi=?,urun_fiyat=?,urun_stok_adedi=?,urun_rengi=?,urun_bedeni=? where urun_id=?");
             pst.setString(1, urun.getUrun_adi());
             pst.setDouble(2, urun.getUrun_fiyat());
             pst.setInt(3, urun.getUrun_stok_adedi());
             pst.setLong(4, urun.getRenk().getR_id());
             pst.setLong(5, urun.getBeden().getB_id());
-            pst.setInt(6, urun.getPhoto().getD_id());
-            pst.setInt(7, urun.getUrun_id());
+            pst.setInt(6, urun.getUrun_id());
             pst.executeUpdate();
             pst=c.prepareStatement("delete from urun_kategori where urun_id=?");
             pst.setLong(1, urun.getUrun_id());
@@ -122,7 +119,6 @@ List<Urunler> urunlist;
             pst = c.prepareStatement("delete from urunler where urun_id=?");
             pst.setInt(1, u.getUrun_id());
             pst.executeUpdate();
-            getPhdao().sil(u.getPhoto());
              } catch (Exception e) {
             System.out.println(e.getMessage());
         }finally {
@@ -143,7 +139,6 @@ List<Urunler> urunlist;
             urun.setUrun_stok_adedi(rs.getInt("urun_stok_adedi"));
             urun.getRenk().setR_id(rs.getLong("urun_rengi"));
             urun.getBeden().setB_id(rs.getLong("urun_bedeni"));
-            urun.getPhoto().setD_id(rs.getInt("urun_resim"));
             urun.setUrunkategorileri(this.getKatdao().getUrunKategorisi(urun_id));
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -163,8 +158,7 @@ List<Urunler> urunlist;
             urun.setUrun_fiyat(rs.getInt("urun_fiyat"));
             urun.setUrun_stok_adedi(rs.getInt("urun_stok_adedi"));
             urun.setRenk(getRenkdao().getRenkList(rs.getInt("urun_rengi")));
-            urun.setBeden(getBedendao().getBaginti(rs.getLong("urun_bedeni")));
-            urun.setPhoto(getPhdao().getBaginti(rs.getInt("urun_resim")));                                                           
+            urun.setBeden(getBedendao().getBaginti(rs.getLong("urun_bedeni")));                                                       
             urun.setUrunkategorileri(this.getKatdao().getUrunKategorisi(urun_id));
         } catch (Exception e) {
             System.out.println(e.getMessage());

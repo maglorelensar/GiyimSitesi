@@ -37,7 +37,6 @@ public class SepetDao {
                 temp.setUrun_adet(rs.getInt("urun_adedi"));
                 temp.setR(getRd().getBaginti(rs.getLong("urun_renk")));
                 temp.setB(getBd().getBaginti(rs.getLong("urun_beden")));
-                temp.setP(getPd().getBaginti(rs.getInt("urun_resim")));
                 sepetlist.add(temp);
             }
         } catch (Exception e) {
@@ -63,13 +62,12 @@ public class SepetDao {
                 sayac=sayac+1;
             }
             if(sayac==0){
-            PreparedStatement pst2=c.prepareStatement("insert into sepet values(default,?,?,?,?,?,?)");
+            PreparedStatement pst2=c.prepareStatement("insert into sepet values(default,?,?,?,?,?)");
             pst2.setInt(1, getKgdao().getSimdiki_id());
             pst2.setInt(2, s.getU().getUrun_id());
             pst2.setInt(3, 1);
             pst2.setLong(4, s.getR().getR_id());
             pst2.setLong(5, s.getB().getB_id());
-            pst2.setInt(6, s.getP().getD_id());
             pst2.executeUpdate();
             }
             else{

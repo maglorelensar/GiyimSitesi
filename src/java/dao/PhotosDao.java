@@ -55,21 +55,6 @@ public class PhotosDao {
         }
     }
 
-    public int songetir() {
-        int deger=0;
-    try {
-            c=DBConnection.getConnection();
-            PreparedStatement pst = c.prepareStatement("select photo_id from photos order by photo_id desc limit 1");
-            ResultSet rs=pst.executeQuery();
-            rs.next();
-            deger=rs.getInt("photo_id");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }finally {
-            DBConnection.closeConnection(c);
-        }
-    return deger;
-}
     public Photos getBaginti(int id) {
         Photos pht=new Photos();
         try {

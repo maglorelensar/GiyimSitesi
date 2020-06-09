@@ -39,6 +39,9 @@ private int pageCount;
         this.getKulDao().update(k);
          this.k=new Kullanici();
     }
+     public void ara(){
+        this.getKulDao().ara(k);
+    }
     public void güncelle2(){
         k.setKul_id(getKgd().getSimdiki_id());
         this.getKulDao().update2(k);

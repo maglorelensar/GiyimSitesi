@@ -14,6 +14,7 @@ import util.DBConnection;
 public class KullaniciDao {
 
     private Connection c;
+    private List<Kullanici> arananliste;
  
     public List<Kullanici> getList(int page,int pageSize) {
         List<Kullanici> kullist = new ArrayList<>();
@@ -161,6 +162,39 @@ public void update2(Kullanici k) {
             DBConnection.closeConnection(c);
         }
         return count;
+    }
+
+  
+
+    public List<Kullanici> ara(Kullanici kull) {
+         try {
+            c=DBConnection.getConnection();
+            PreparedStatement pst = c.prepareStatement("select *from kullanici where k_adi=?");
+            pst.setString(1, kull.getKul_adi());
+            ResultSet rs=pst.executeQuery();
+            rs.next();
+            Kullanici aranan=new Kullanici();
+            aranan.setKul_id(rs.getInt("k_id"));
+            aranan.setKul_adi(rs.getString("k_adi"));
+            aranan.setKul_sifre(rs.getString("k_sifre"));
+            this.getArananliste().add(aranan);
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }finally {
+            DBConnection.closeConnection(c);
+        }
+         return getArananliste();
+    }
+
+    public List<Kullanici> getArananliste() {
+        if(this.arananliste==null)
+            this.arananliste=new ArrayList<>();
+        return arananliste;
+    }
+
+    public void setArananliste(List<Kullanici> arananliste) {
+        this.arananliste = arananliste;
     }
 
 }

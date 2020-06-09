@@ -12,7 +12,6 @@ public class Urunler {
     private int urun_stok_adedi;
     private Renkler renk;
     private Bedenler beden;
-    private Photos photo;
     private List<Kategori> urunkategorileri;
     
 public Urunler() {
@@ -81,15 +80,7 @@ public Urunler() {
         this.urun_stok_adedi = urun_stok_adedi;
     }
 
-    public Photos getPhoto() {
-        if(this.photo==null)
-        this.photo=new Photos();
-        return photo;
-    }
-
-    public void setPhoto(Photos photo) {
-        this.photo = photo;
-    }
+    
 
     public List<Kategori> getUrunkategorileri() {
         if(this.urunkategorileri==null)

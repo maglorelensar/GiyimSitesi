@@ -14,15 +14,12 @@
                         <h:form id="filtreliliste"><ul class="navbar-nav">
                             <ui:repeat value="#{urunc.katcon.listkategori}" var="k">
                             <li class="nav-item active">
-                                <h:commandLink style="background-color: pink" styleClass="nav-link" action="#{urunc.filtre(k)}" value="#{k.kat_adi}" rendered="#{!kgc.icerde}">
+                                <h:commandLink style="background-color: pink" styleClass="nav-link" action="#{urunc.filtre(k)}" value="#{k.kat_adi}">
                                 </h:commandLink>
                             </li>
                             </ui:repeat></ul>
                             <h:dataTable value="#{urunc.filtrele(k)}" var="filtre">
-                                <h:column>
-                                   <f:facet name="header">Ürün Resmi </f:facet>
-                                <h:graphicImage value="/file/#{filtre.photo.dosyaadi}" width="50" height="50"/> 
-                                </h:column>
+                                
                                 <h:column>
                                     <f:facet name="header">Ürün Adı </f:facet>
                                     #{filtre.urun_adi}

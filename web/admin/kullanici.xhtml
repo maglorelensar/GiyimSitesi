@@ -66,4 +66,29 @@
                             </h:column>
                         </h:dataTable>  
                     </h:form>
-               </div></ui:define></ui:composition>
+                </div>
+        <div class="row"> <div class="col-md-6">
+                   Aranacak kullanıcı adını giriniz. <h:inputText styleClass="form-control" value="#{kullaniciController.k.kul_adi}"/>
+                   <h:commandButton rendered="#{kullaniciController.k.kul_id == 0}" styleClass="btn btn-danger" style="margin-left:25px"  action="#{kullaniciController.ara()}" value="Ara">
+                                    <f:ajax execute="@this" render="kul-tablo2"/>
+                            </h:commandButton>
+            </div><div class="col-md-6">
+                
+                <h:form id="kul-tablo2">
+                        <h:dataTable styleClass="table table-striped" value="#{kullaniciController.list}" var="k">
+                            <h:column>
+                                <f:facet name="header">ID </f:facet>
+                                    #{k.kul_id}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"> AD  </f:facet>
+                                    #{k.kul_adi}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">SİFRE</f:facet>
+                                    #{k.kul_sifre}
+                            </h:column>                            
+                        </h:dataTable>  
+                    </h:form>
+                
+            </div> </ui:define></ui:composition>
