@@ -4,6 +4,7 @@ import dao.KullaniciDao;
 import dao.KullaniciGirisiDao;
 import entity.Kullanici;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -16,9 +17,11 @@ public class KullaniciController implements Serializable {
     private KullaniciDao kulDao;
     private Kullanici k;
      KullaniciGirisiDao kgd;
+     private List<Kullanici> aramalist;
      private int page=1;
 private int pageSize=5;
 private int pageCount;
+private String aranan;
     public KullaniciController() {
     }
     public void ileri(){
@@ -40,7 +43,8 @@ private int pageCount;
          this.k=new Kullanici();
     }
      public void ara(){
-        this.getKulDao().ara(k);
+         this.setAramalist(null);
+       this.setAramalist(this.getKulDao().ara(aranan)); ;
     }
     public void güncelle2(){
         k.setKul_id(getKgd().getSimdiki_id());
@@ -85,6 +89,7 @@ private int pageCount;
      return this.getKulDao().getList(page,pageSize);
      
     }
+    
  public Kullanici getBaginti(int sepet_id) {
        
         return this.getKulDao().getBaginti(sepet_id);
@@ -119,5 +124,23 @@ private int pageCount;
 
     public void setPageCount(int pageCount) {
         this.pageCount = pageCount;
+    }
+
+    public List<Kullanici> getAramalist() {
+        if(this.aramalist==null)
+            this.aramalist=new ArrayList<>();
+        return aramalist;
+    }
+
+    public void setAramalist(List<Kullanici> aramalist) {
+        this.aramalist = aramalist;
+    }
+
+    public String getAranan() {
+        return aranan;
+    }
+
+    public void setAranan(String aranan) {
+        this.aranan = aranan;
     }
 }

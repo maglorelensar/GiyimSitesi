@@ -166,18 +166,21 @@ public void update2(Kullanici k) {
 
   
 
-    public List<Kullanici> ara(Kullanici kull) {
+    public List<Kullanici> ara(String aranann) {
          try {
             c=DBConnection.getConnection();
             PreparedStatement pst = c.prepareStatement("select *from kullanici where k_adi=?");
-            pst.setString(1, kull.getKul_adi());
+            pst.setString(1, aranann);
             ResultSet rs=pst.executeQuery();
-            rs.next();
-            Kullanici aranan=new Kullanici();
+            this.setArananliste(null);
+            if(rs.next()){
+             Kullanici aranan=new Kullanici();
             aranan.setKul_id(rs.getInt("k_id"));
             aranan.setKul_adi(rs.getString("k_adi"));
             aranan.setKul_sifre(rs.getString("k_sifre"));
             this.getArananliste().add(aranan);
+            }
+           
             
         } catch (Exception e) {
             System.out.println(e.getMessage());

@@ -153,9 +153,6 @@
                         
                         <f:selectItems value="#{bedc.listbeden}" var="bedenler" itemValue="#{bedenler}" itemLabel="#{bedenler.b_tipi}"/>
                         </h:selectOneMenu><br/><br/>
-                        <b> Ürün Resmi(Dosya adında Türkçe karakter kullanmayınız!!!) : </b>  <h:inputFile value="#{phc.photo}" styleClass="custom-file"/>
-                        <h:commandButton action="#{phc.yukle}" value="Resmi yükle" styleClass="btn btn-primary" style="margin-right:25px;"/>
-                        <br/><br/>
                         <b> Ürün Kategorisi : </b><br/>
                         <h:selectManyListbox value="#{urunc.urun.urunkategorileri}" styleClass="custom-select"  converter="kategoriConverter">
                             <f:selectItems value="#{urunc.katcon.listkategori}" var="kategori" itemValue="#{kategori}" itemLabel="#{kategori.kat_adi}"/>
@@ -204,10 +201,6 @@
                                     <li>#{kat.kat_adi}</li>
                                 </ui:repeat>
                             </ul>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Ürün Resmi </f:facet>
-                                <h:graphicImage value="/file/#{u.photo.dosyaadi}" width="50" height="50"/>
                             </h:column>
                             
                             <h:column>

@@ -19,6 +19,7 @@ import util.DBConnection;
  * @author user
  */
 public class KategoriDao {
+    
 private Connection c;
 private UrunlerDao urdao;
     public List<Kategori> getKategoriList() {
